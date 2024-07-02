@@ -20,8 +20,6 @@ package walkingkooka.net.convert;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
-import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
