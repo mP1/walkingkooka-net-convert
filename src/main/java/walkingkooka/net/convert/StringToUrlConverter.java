@@ -52,14 +52,14 @@ final class StringToUrlConverter<C extends ConverterContext> implements Converte
     public boolean canConvert(final Object value,
                               final Class<?> type,
                               final C context) {
-        return value instanceof String && Url.isUrl(type);
+        return value instanceof String && Url.isClass(type);
     }
 
     @Override
     public <T> Either<T, String> convert(final Object value,
                                          final Class<T> type,
                                          final C context) {
-        return value instanceof String && Url.isUrl(type) ?
+        return value instanceof String && Url.isClass(type) ?
                 this.successfulConversion(
                         Url.parseAsUrl(
                                 (String) value,
