@@ -18,6 +18,7 @@
 package walkingkooka.net.convert;
 
 import walkingkooka.convert.Converter;
+import walkingkooka.convert.provider.ConverterProvider;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.reflect.PublicStaticHelper;
@@ -31,6 +32,13 @@ public final class NetConverterProviders implements PublicStaticHelper {
     public final static AbsoluteUrl BASE_URL = Url.parseAbsolute(
             "https://github.com/mP1/walkingkooka-net-convert/" + Converter.class.getSimpleName()
     );
+
+    /**
+     * {@see NetConvertersConverterProvider}
+     */
+    public static ConverterProvider netConverters() {
+        return NetConvertersConverterProvider.INSTANCE;
+    }
 
     private NetConverterProviders() {
         throw new UnsupportedOperationException();
