@@ -17,12 +17,22 @@
 
 package walkingkooka.net.convert;
 
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.ConverterContext;
+import walkingkooka.net.header.MediaType;
 import walkingkooka.reflect.PublicStaticHelper;
 
 /**
  * A collection of {@link walkingkooka.convert.Converter} for walkingkooka.net
  */
 public final class NetConverters implements PublicStaticHelper {
+
+    /**
+     * {@see HttpEntityWithContentTypeToHttpEntityConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> httpEntityContentType(final MediaType contentType) {
+        return HttpEntityWithContentTypeToHttpEntityConverter.with(contentType);
+    }
 
     /**
      * Stop creation
