@@ -64,6 +64,13 @@ final class NetConvertersConverterProvider implements ConverterProvider {
                         )
                 );
                 break;
+            case STRING_TO_URL_STRING:
+                if (0 != count) {
+                    throw new IllegalArgumentException("Expected 0 value(s) got " + count + " " + values);
+                }
+
+                converter = NetConverters.stringToUrl();
+                break;
             default:
                 converter = null;
                 break;
@@ -78,13 +85,18 @@ final class NetConvertersConverterProvider implements ConverterProvider {
 
     final static ConverterName HTTP_ENTITY_CONTENT_TYPE = ConverterName.with(HTTP_ENTITY_CONTENT_TYPE_STRING);
 
+    final static String STRING_TO_URL_STRING = "string-to-url";
+
+    final static ConverterName STRING_TO_URL = ConverterName.with(STRING_TO_URL_STRING);
+
     @Override
     public Set<ConverterInfo> converterInfos() {
         return INFOS;
     }
 
     private final static Set<ConverterInfo> INFOS = Sets.of(
-            nameToConverterInfo(HTTP_ENTITY_CONTENT_TYPE)
+            nameToConverterInfo(HTTP_ENTITY_CONTENT_TYPE),
+            nameToConverterInfo(STRING_TO_URL)
     );
 
     private static ConverterInfo nameToConverterInfo(final ConverterName name) {
