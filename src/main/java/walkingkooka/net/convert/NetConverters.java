@@ -35,6 +35,13 @@ public final class NetConverters implements PublicStaticHelper {
     }
 
     /**
+     * {@see StringToUrlConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> stringToUrl() {
+        return StringToUrlConverter.instance();
+    }
+
+    /**
      * Stop creation
      */
     private NetConverters() {
