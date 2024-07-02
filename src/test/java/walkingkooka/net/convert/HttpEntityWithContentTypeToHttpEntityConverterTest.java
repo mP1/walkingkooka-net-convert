@@ -23,6 +23,7 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.ConverterTesting2;
+import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.net.header.HttpHeaderName;
 import walkingkooka.net.header.MediaType;
@@ -96,6 +97,25 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
                         MediaType.TEXT_PLAIN
                 ),
                 HttpEntity.class
+        );
+    }
+
+    @Test
+    public void testConvertHttpEntityToString() {
+        final String bodyText = "BodyText 123abc";
+
+        this.convertAndCheck(
+                HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ANY_TEXT)
+                        .to(
+                                String.class,
+                                Converters.hasTextToString()
+                        ),
+                HttpEntity.EMPTY.addHeader(
+                        HttpHeaderName.CONTENT_TYPE,
+                        MediaType.TEXT_PLAIN
+                ).setBodyText(bodyText),
+                String.class,
+                bodyText
         );
     }
 
