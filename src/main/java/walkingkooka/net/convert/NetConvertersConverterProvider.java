@@ -25,7 +25,6 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.provider.ConverterInfo;
 import walkingkooka.convert.provider.ConverterName;
 import walkingkooka.convert.provider.ConverterProvider;
-import walkingkooka.convert.provider.ConverterProviders;
 import walkingkooka.net.UrlPath;
 import walkingkooka.net.header.MediaType;
 
@@ -101,7 +100,7 @@ final class NetConvertersConverterProvider implements ConverterProvider {
 
     private static ConverterInfo nameToConverterInfo(final ConverterName name) {
         return ConverterInfo.with(
-                ConverterProviders.BASE_URL.appendPath(
+                NetConverterProviders.BASE_URL.appendPath(
                         UrlPath.parse(
                                 name.value()
                         )
