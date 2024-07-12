@@ -21,10 +21,6 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.net.AbsoluteUrl;
-import walkingkooka.net.DataUrl;
-import walkingkooka.net.MailToUrl;
-import walkingkooka.net.RelativeUrl;
 import walkingkooka.net.Url;
 
 /**
