@@ -25,10 +25,12 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.provider.ConverterInfo;
 import walkingkooka.convert.provider.ConverterName;
 import walkingkooka.convert.provider.ConverterProvider;
+import walkingkooka.convert.provider.ConverterSelector;
 import walkingkooka.net.UrlPath;
 import walkingkooka.net.header.MediaType;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -44,8 +46,15 @@ final class NetConvertersConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
-                                                                         final List<?> values) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector) {
+        Objects.requireNonNull(selector, "selector");
+
+        return selector.evaluateText(this);
+    }
+
+    @Override
+    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                               final List<?> values) {
         Converter<?> converter;
 
         final List<?> copy = Lists.immutable(values);
@@ -71,13 +80,10 @@ final class NetConvertersConverterProvider implements ConverterProvider {
                 converter = NetConverters.stringToUrl();
                 break;
             default:
-                converter = null;
-                break;
+                throw new IllegalArgumentException("Unknown converter " + name);
         }
 
-        return Optional.ofNullable(
-                Cast.to(converter)
-        );
+        return Cast.to(converter);
     }
 
     final static String HTTP_ENTITY_CONTENT_TYPE_STRING = "http-entity-content-type";

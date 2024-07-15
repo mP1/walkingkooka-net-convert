@@ -25,7 +25,7 @@ import walkingkooka.reflect.JavaVisibility;
 public final class NetConvertersConverterProviderTest implements ConverterProviderTesting<NetConvertersConverterProvider> {
 
     @Test
-    public void testConverterHttpEntityContentType() {
+    public void testConverterSelectorHttpEntityContentType() {
         final MediaType contentType = MediaType.TEXT_PLAIN;
 
         this.converterAndCheck(
