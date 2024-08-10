@@ -20,6 +20,7 @@ package walkingkooka.net.convert;
 import org.junit.jupiter.api.Test;
 import walkingkooka.convert.provider.ConverterProviderTesting;
 import walkingkooka.net.header.MediaType;
+import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 
 public final class NetConvertersConverterProviderTest implements ConverterProviderTesting<NetConvertersConverterProvider> {
@@ -30,6 +31,7 @@ public final class NetConvertersConverterProviderTest implements ConverterProvid
 
         this.converterAndCheck(
                 NetConvertersConverterProvider.HTTP_ENTITY_CONTENT_TYPE_STRING + " (\"" + contentType + "\")",
+                ProviderContexts.fake(),
                 NetConverters.httpEntityContentType(contentType)
         );
     }
