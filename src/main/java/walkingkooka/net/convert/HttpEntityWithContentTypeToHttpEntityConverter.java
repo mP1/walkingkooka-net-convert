@@ -51,7 +51,7 @@ final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterCo
     }
 
     private boolean isContentType(final HttpEntity httpEntity) {
-        return HttpHeaderName.CONTENT_TYPE.header(httpEntity)
+        return httpEntity.contentType()
                 .map( c -> this.contentType.test(c))
                 .orElse(false);
     }
