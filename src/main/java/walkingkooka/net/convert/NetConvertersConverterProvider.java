@@ -28,6 +28,7 @@ import walkingkooka.convert.provider.ConverterProvider;
 import walkingkooka.convert.provider.ConverterSelector;
 import walkingkooka.net.UrlPath;
 import walkingkooka.net.header.MediaType;
+import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,15 +47,21 @@ final class NetConvertersConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
+                                                               final ProviderContext context) {
         Objects.requireNonNull(selector, "selector");
+        Objects.requireNonNull(context, "context");
 
-        return selector.evaluateText(this);
+        return selector.evaluateText(
+                this,
+                context
+        );
     }
 
     @Override
     public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                               final List<?> values) {
+                                                               final List<?> values,
+                                                               final ProviderContext context) {
         Converter<?> converter;
 
         final List<?> copy = Lists.immutable(values);
