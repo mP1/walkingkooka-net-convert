@@ -23,6 +23,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.provider.ConverterInfo;
+import walkingkooka.convert.provider.ConverterInfoSet;
 import walkingkooka.convert.provider.ConverterName;
 import walkingkooka.convert.provider.ConverterProvider;
 import walkingkooka.convert.provider.ConverterSelector;
@@ -102,13 +103,15 @@ final class NetConvertersConverterProvider implements ConverterProvider {
     final static ConverterName STRING_TO_URL = ConverterName.with(STRING_TO_URL_STRING);
 
     @Override
-    public Set<ConverterInfo> converterInfos() {
+    public ConverterInfoSet converterInfos() {
         return INFOS;
     }
 
-    private final static Set<ConverterInfo> INFOS = Sets.of(
-            nameToConverterInfo(HTTP_ENTITY_CONTENT_TYPE),
-            nameToConverterInfo(STRING_TO_URL)
+    private final static ConverterInfoSet INFOS = ConverterInfoSet.with(
+            Sets.of(
+                    nameToConverterInfo(HTTP_ENTITY_CONTENT_TYPE),
+                    nameToConverterInfo(STRING_TO_URL)
+            )
     );
 
     private static ConverterInfo nameToConverterInfo(final ConverterName name) {
