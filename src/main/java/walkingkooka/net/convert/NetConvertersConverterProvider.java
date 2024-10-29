@@ -53,7 +53,7 @@ final class NetConvertersConverterProvider implements ConverterProvider {
         Objects.requireNonNull(selector, "selector");
         Objects.requireNonNull(context, "context");
 
-        return selector.evaluateText(
+        return selector.evaluateValueText(
                 this,
                 context
         );
