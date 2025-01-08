@@ -33,8 +33,6 @@ import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * A {@link ConverterProvider} for {@link NetConverterProviders}.
@@ -54,8 +52,8 @@ final class NetConvertersConverterProvider implements ConverterProvider {
         Objects.requireNonNull(context, "context");
 
         return selector.evaluateValueText(
-                this,
-                context
+            this,
+            context
         );
     }
 
@@ -79,9 +77,9 @@ final class NetConvertersConverterProvider implements ConverterProvider {
                 }
 
                 converter = NetConverters.httpEntityContentType(
-                        MediaType.parse(
-                                (String) values.get(0)
-                        )
+                    MediaType.parse(
+                        (String) values.get(0)
+                    )
                 );
                 break;
             case STRING_TO_URL_STRING:
@@ -112,20 +110,20 @@ final class NetConvertersConverterProvider implements ConverterProvider {
     }
 
     private final static ConverterInfoSet INFOS = ConverterInfoSet.with(
-            Sets.of(
-                    nameToConverterInfo(HTTP_ENTITY_CONTENT_TYPE),
-                    nameToConverterInfo(STRING_TO_URL)
-            )
+        Sets.of(
+            nameToConverterInfo(HTTP_ENTITY_CONTENT_TYPE),
+            nameToConverterInfo(STRING_TO_URL)
+        )
     );
 
     private static ConverterInfo nameToConverterInfo(final ConverterName name) {
         return ConverterInfo.with(
-                NetConverterProviders.BASE_URL.appendPath(
-                        UrlPath.parse(
-                                name.value()
-                        )
-                ),
-                name
+            NetConverterProviders.BASE_URL.appendPath(
+                UrlPath.parse(
+                    name.value()
+                )
+            ),
+            name
         );
     }
 

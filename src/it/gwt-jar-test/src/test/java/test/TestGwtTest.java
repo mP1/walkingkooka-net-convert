@@ -10,6 +10,7 @@ import walkingkooka.net.convert.NetConverters;
 import walkingkooka.net.header.HttpHeaderName;
 import walkingkooka.net.header.MediaType;
 import walkingkooka.net.http.HttpEntity;
+
 @walkingkooka.j2cl.locale.LocaleAware
 public class TestGwtTest extends GWTTestCase {
 
@@ -20,8 +21,8 @@ public class TestGwtTest extends GWTTestCase {
 
     public void testAssertEquals() {
         assertEquals(
-                1,
-                1
+            1,
+            1
         );
     }
 
@@ -31,26 +32,26 @@ public class TestGwtTest extends GWTTestCase {
         final String text = "BodyText123";
 
         checkEquals(
-                text,
-                converter.to(
-                        String.class,
-                        Converters.hasTextToString()
-                ).convertOrFail(
-                        HttpEntity.EMPTY.addHeader(
-                                HttpHeaderName.CONTENT_TYPE,
-                                MediaType.TEXT_PLAIN
-                        ).setBodyText(text),
-                        String.class,
-                        ConverterContexts.fake()
-                )
+            text,
+            converter.to(
+                String.class,
+                Converters.hasTextToString()
+            ).convertOrFail(
+                HttpEntity.EMPTY.addHeader(
+                    HttpHeaderName.CONTENT_TYPE,
+                    MediaType.TEXT_PLAIN
+                ).setBodyText(text),
+                String.class,
+                ConverterContexts.fake()
+            )
         );
     }
 
     private void checkEquals(final Object expected,
                              final Object actual) {
         assertEquals(
-                expected,
-                actual
+            expected,
+            actual
         );
     }
 }

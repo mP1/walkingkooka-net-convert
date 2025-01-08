@@ -30,13 +30,13 @@ import walkingkooka.net.http.HttpEntity;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements ConverterTesting2<HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext>, FakeConverterContext>,
-        HashCodeEqualsDefinedTesting2<HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext>> {
+    HashCodeEqualsDefinedTesting2<HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext>> {
 
     @Test
     public void testWithNullFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> HttpEntityWithContentTypeToHttpEntityConverter.with(null)
+            NullPointerException.class,
+            () -> HttpEntityWithContentTypeToHttpEntityConverter.with(null)
         );
     }
 
@@ -45,56 +45,56 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     @Test
     public void testConvertHttpEntityMissingContentTypeFails() {
         this.convertFails(
-                HttpEntity.EMPTY,
-                HttpEntity.class
+            HttpEntity.EMPTY,
+            HttpEntity.class
         );
     }
 
     @Test
     public void testConvertHttpEntityIncompatibleContentTypeFails() {
         this.convertFails(
-                HttpEntity.EMPTY.addHeader(
-                        HttpHeaderName.CONTENT_TYPE,
-                        MediaType.TEXT_PLAIN
-                ),
-                HttpEntity.class
+            HttpEntity.EMPTY.addHeader(
+                HttpHeaderName.CONTENT_TYPE,
+                MediaType.TEXT_PLAIN
+            ),
+            HttpEntity.class
         );
     }
 
     @Test
     public void testConvertHttpEntityIncompatibleContentTypeFails2() {
         this.convertFails(
-                HttpEntityWithContentTypeToHttpEntityConverter.with(
-                        MediaType.ANY_TEXT
-                ),
-                HttpEntity.EMPTY.addHeader(
-                        HttpHeaderName.CONTENT_TYPE,
-                        MediaType.IMAGE_PNG
-                ),
-                HttpEntity.class
+            HttpEntityWithContentTypeToHttpEntityConverter.with(
+                MediaType.ANY_TEXT
+            ),
+            HttpEntity.EMPTY.addHeader(
+                HttpHeaderName.CONTENT_TYPE,
+                MediaType.IMAGE_PNG
+            ),
+            HttpEntity.class
         );
     }
 
     @Test
     public void testConvertHttpEntityExactContentType() {
         this.convertAndCheck(
-                HttpEntity.EMPTY.addHeader(
-                        HttpHeaderName.CONTENT_TYPE,
-                        CONTENT_TYPE
-                ),
-                HttpEntity.class
+            HttpEntity.EMPTY.addHeader(
+                HttpHeaderName.CONTENT_TYPE,
+                CONTENT_TYPE
+            ),
+            HttpEntity.class
         );
     }
 
     @Test
     public void testConvertHttpEntityCompatibleContentType() {
         this.convertAndCheck(
-                HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ANY_TEXT),
-                HttpEntity.EMPTY.addHeader(
-                        HttpHeaderName.CONTENT_TYPE,
-                        MediaType.TEXT_PLAIN
-                ),
-                HttpEntity.class
+            HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ANY_TEXT),
+            HttpEntity.EMPTY.addHeader(
+                HttpHeaderName.CONTENT_TYPE,
+                MediaType.TEXT_PLAIN
+            ),
+            HttpEntity.class
         );
     }
 
@@ -103,17 +103,17 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
         final String bodyText = "BodyText 123abc";
 
         this.convertAndCheck(
-                HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ANY_TEXT)
-                        .to(
-                                String.class,
-                                Converters.hasTextToString()
-                        ),
-                HttpEntity.EMPTY.addHeader(
-                        HttpHeaderName.CONTENT_TYPE,
-                        MediaType.TEXT_PLAIN
-                ).setBodyText(bodyText),
-                String.class,
-                bodyText
+            HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ANY_TEXT)
+                .to(
+                    String.class,
+                    Converters.hasTextToString()
+                ),
+            HttpEntity.EMPTY.addHeader(
+                HttpHeaderName.CONTENT_TYPE,
+                MediaType.TEXT_PLAIN
+            ).setBodyText(bodyText),
+            String.class,
+            bodyText
         );
     }
 
@@ -132,7 +132,7 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     @Test
     public void testEqualsDifferentContentType() {
         this.checkNotEquals(
-                HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ALL)
+            HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ALL)
         );
     }
 
@@ -146,8 +146,8 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                HttpEntityWithContentTypeToHttpEntityConverter.with(CONTENT_TYPE),
-                CONTENT_TYPE.toString()
+            HttpEntityWithContentTypeToHttpEntityConverter.with(CONTENT_TYPE),
+            CONTENT_TYPE.toString()
         );
     }
 

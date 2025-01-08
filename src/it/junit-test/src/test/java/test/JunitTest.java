@@ -21,8 +21,8 @@ public class JunitTest {
     @Test
     public void testAssertEquals() {
         Assert.assertEquals(
-                1,
-                1
+            1,
+            1
         );
     }
 
@@ -33,26 +33,26 @@ public class JunitTest {
         final String text = "BodyText123";
 
         checkEquals(
-                text,
-                converter.to(
-                        String.class,
-                        Converters.hasTextToString()
-                ).convertOrFail(
-                        HttpEntity.EMPTY.addHeader(
-                                HttpHeaderName.CONTENT_TYPE,
-                                MediaType.TEXT_PLAIN
-                        ).setBodyText(text),
-                        String.class,
-                        ConverterContexts.fake()
-                )
+            text,
+            converter.to(
+                String.class,
+                Converters.hasTextToString()
+            ).convertOrFail(
+                HttpEntity.EMPTY.addHeader(
+                    HttpHeaderName.CONTENT_TYPE,
+                    MediaType.TEXT_PLAIN
+                ).setBodyText(text),
+                String.class,
+                ConverterContexts.fake()
+            )
         );
     }
 
     private void checkEquals(final Object expected,
                              final Object actual) {
         Assert.assertEquals(
-                expected,
-                actual
+            expected,
+            actual
         );
     }
 }

@@ -56,17 +56,17 @@ final class StringToUrlConverter<C extends ConverterContext> implements Converte
                                          final Class<T> type,
                                          final C context) {
         return value instanceof String && Url.isClass(type) ?
-                this.successfulConversion(
-                        Url.parseAsUrl(
-                                (String) value,
-                                Cast.to(type)
-                        ),
-                        type
-                ) :
-                this.failConversion(
-                        value,
-                        type
-                );
+            this.successfulConversion(
+                Url.parseAsUrl(
+                    (String) value,
+                    Cast.to(type)
+                ),
+                type
+            ) :
+            this.failConversion(
+                value,
+                type
+            );
     }
 
     @Override

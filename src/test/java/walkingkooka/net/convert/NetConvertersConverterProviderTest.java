@@ -30,9 +30,9 @@ public final class NetConvertersConverterProviderTest implements ConverterProvid
         final MediaType contentType = MediaType.TEXT_PLAIN;
 
         this.converterAndCheck(
-                NetConvertersConverterProvider.HTTP_ENTITY_CONTENT_TYPE_STRING + " (\"" + contentType + "\")",
-                ProviderContexts.fake(),
-                NetConverters.httpEntityContentType(contentType)
+            NetConvertersConverterProvider.HTTP_ENTITY_CONTENT_TYPE_STRING + " (\"" + contentType + "\")",
+            ProviderContexts.fake(),
+            NetConverters.httpEntityContentType(contentType)
         );
     }
 
