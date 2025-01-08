@@ -30,7 +30,7 @@ public final class NetConverterProviders implements PublicStaticHelper {
      * converter will be appended to this base.
      */
     public final static AbsoluteUrl BASE_URL = Url.parseAbsolute(
-            "https://github.com/mP1/walkingkooka-net-convert/" + Converter.class.getSimpleName()
+        "https://github.com/mP1/walkingkooka-net-convert/" + Converter.class.getSimpleName()
     );
 
     /**

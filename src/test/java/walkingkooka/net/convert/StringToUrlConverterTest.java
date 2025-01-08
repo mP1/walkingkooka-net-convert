@@ -34,18 +34,18 @@ public final class StringToUrlConverterTest implements ConverterTesting2<StringT
         final String url = "https://example.com";
 
         this.convertStringAndCheck2(
-                url,
-                Url.class,
-                Url.parse(url)
+            url,
+            Url.class,
+            Url.parse(url)
         );
     }
 
     @Test
     public void testConvertStringToAbsoluteUrl() {
         this.convertStringAndCheck(
-                "https://example.com",
-                AbsoluteUrl.class,
-                Url::parseAbsolute
+            "https://example.com",
+            AbsoluteUrl.class,
+            Url::parseAbsolute
         );
     }
 
@@ -53,9 +53,9 @@ public final class StringToUrlConverterTest implements ConverterTesting2<StringT
     @Test
     public void testConvertStringToRelativeUrl() {
         this.convertStringAndCheck(
-                "/relative-url/path2/path3?query",
-                RelativeUrl.class,
-                Url::parseRelative
+            "/relative-url/path2/path3?query",
+            RelativeUrl.class,
+            Url::parseRelative
         );
     }
 
@@ -63,19 +63,19 @@ public final class StringToUrlConverterTest implements ConverterTesting2<StringT
                                                        final Class<T> type,
                                                        final Function<String, T> expected) {
         this.convertStringAndCheck2(
-                url,
-                type,
-                expected.apply(url)
+            url,
+            type,
+            expected.apply(url)
         );
     }
 
     private <T extends Url> void convertStringAndCheck2(final String url,
-                                                       final Class<T> type,
-                                                       final T expected) {
+                                                        final Class<T> type,
+                                                        final T expected) {
         this.convertAndCheck(
-                url,
-                type,
-                expected
+            url,
+            type,
+            expected
         );
     }
 

@@ -39,18 +39,18 @@ public class Sample implements Testing {
         final String text = "BodyText123";
 
         checkEquals(
-                text,
-                converter.to(
-                        String.class,
-                        Converters.hasTextToString()
-                ).convertOrFail(
-                        HttpEntity.EMPTY.addHeader(
-                                HttpHeaderName.CONTENT_TYPE,
-                                MediaType.TEXT_PLAIN
-                        ).setBodyText(text),
-                        String.class,
-                        ConverterContexts.fake()
-                )
+            text,
+            converter.to(
+                String.class,
+                Converters.hasTextToString()
+            ).convertOrFail(
+                HttpEntity.EMPTY.addHeader(
+                    HttpHeaderName.CONTENT_TYPE,
+                    MediaType.TEXT_PLAIN
+                ).setBodyText(text),
+                String.class,
+                ConverterContexts.fake()
+            )
         );
     }
 }

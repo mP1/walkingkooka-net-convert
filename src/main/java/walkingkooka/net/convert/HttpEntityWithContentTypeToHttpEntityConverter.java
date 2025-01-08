@@ -21,7 +21,6 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.net.header.HttpHeaderName;
 import walkingkooka.net.header.MediaType;
 import walkingkooka.net.http.HttpEntity;
 
@@ -35,7 +34,7 @@ final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterCo
 
     static HttpEntityWithContentTypeToHttpEntityConverter with(final MediaType contentType) {
         return new HttpEntityWithContentTypeToHttpEntityConverter(
-                Objects.requireNonNull(contentType, "contentType")
+            Objects.requireNonNull(contentType, "contentType")
         );
     }
 
@@ -52,8 +51,8 @@ final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterCo
 
     private boolean isContentType(final HttpEntity httpEntity) {
         return httpEntity.contentType()
-                .map( c -> this.contentType.test(c))
-                .orElse(false);
+            .map(c -> this.contentType.test(c))
+            .orElse(false);
     }
 
     private final MediaType contentType;
@@ -63,15 +62,15 @@ final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterCo
                                          final Class<T> type,
                                          final C context) {
         return this.canConvert(
-                value,
-                type,
-                context
+            value,
+            type,
+            context
         ) ? this.successfulConversion(
-                value,
-                type
+            value,
+            type
         ) : this.failConversion(
-                value,
-                type
+            value,
+            type
         );
     }
 
@@ -85,8 +84,8 @@ final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterCo
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof HttpEntityWithContentTypeToHttpEntityConverter &&
-                        this.equals0(Cast.to(other));
+            other instanceof HttpEntityWithContentTypeToHttpEntityConverter &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final HttpEntityWithContentTypeToHttpEntityConverter<?> other) {
