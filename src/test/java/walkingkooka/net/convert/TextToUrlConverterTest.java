@@ -19,7 +19,10 @@ package walkingkooka.net.convert;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.Either;
+import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterTesting2;
+import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.RelativeUrl;
@@ -27,7 +30,7 @@ import walkingkooka.net.Url;
 
 import java.util.function.Function;
 
-public final class StringToUrlConverterTest implements ConverterTesting2<StringToUrlConverter<FakeConverterContext>, FakeConverterContext> {
+public final class TextToUrlConverterTest implements ConverterTesting2<TextToUrlConverter<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertStringToUrl() {
@@ -80,17 +83,40 @@ public final class StringToUrlConverterTest implements ConverterTesting2<StringT
     }
 
     @Override
-    public StringToUrlConverter<FakeConverterContext> createConverter() {
-        return StringToUrlConverter.instance();
+    public TextToUrlConverter<FakeConverterContext> createConverter() {
+        return TextToUrlConverter.instance();
     }
 
     @Override
     public FakeConverterContext createContext() {
-        return new FakeConverterContext();
+        return new FakeConverterContext() {
+
+            @Override
+            public boolean canConvert(final Object value,
+                                      final Class<?> type) {
+                return this.converter.canConvert(
+                    value,
+                    type,
+                    this
+                );
+            }
+
+            @Override
+            public <T> Either<T, String> convert(final Object value,
+                                                 final Class<T> target) {
+                return converter.convert(
+                    value,
+                    target,
+                    this
+                );
+            }
+
+            private final Converter<FakeConverterContext> converter = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+        };
     }
 
     @Override
-    public Class<StringToUrlConverter<FakeConverterContext>> type() {
-        return Cast.to(StringToUrlConverter.class);
+    public Class<TextToUrlConverter<FakeConverterContext>> type() {
+        return Cast.to(TextToUrlConverter.class);
     }
 }
