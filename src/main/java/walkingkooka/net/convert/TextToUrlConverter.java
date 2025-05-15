@@ -26,21 +26,21 @@ import walkingkooka.net.Url;
 /**
  * A {@link Converter} that supports converting a {@link String} to one of the {@link Url} sub-classes.
  */
-final class StringToUrlConverter<C extends ConverterContext> implements Converter<C> {
+final class TextToUrlConverter<C extends ConverterContext> implements Converter<C> {
 
     /**
      * Type safe getter.
      */
-    static <C extends ConverterContext> StringToUrlConverter<C> instance() {
+    static <C extends ConverterContext> TextToUrlConverter<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static StringToUrlConverter INSTANCE = new StringToUrlConverter();
+    private final static TextToUrlConverter INSTANCE = new TextToUrlConverter();
 
-    private StringToUrlConverter() {
+    private TextToUrlConverter() {
         super();
     }
 
@@ -48,17 +48,27 @@ final class StringToUrlConverter<C extends ConverterContext> implements Converte
     public boolean canConvert(final Object value,
                               final Class<?> type,
                               final C context) {
-        return value instanceof String && Url.isClass(type);
+        return context.canConvert(
+            value,
+            String.class
+        ) && Url.isClass(type);
     }
 
     @Override
     public <T> Either<T, String> convert(final Object value,
                                          final Class<T> type,
                                          final C context) {
-        return value instanceof String && Url.isClass(type) ?
+        return this.canConvert(
+            value,
+            type,
+            context
+        ) ?
             this.successfulConversion(
                 Url.parseAsUrl(
-                    (String) value,
+                    context.convertOrFail(
+                        value,
+                        String.class
+                    ),
                     Cast.to(type)
                 ),
                 type
@@ -71,6 +81,6 @@ final class StringToUrlConverter<C extends ConverterContext> implements Converte
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName();
+        return "text-to-url";
     }
 }

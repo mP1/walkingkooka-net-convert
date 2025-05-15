@@ -82,12 +82,12 @@ final class NetConvertersConverterProvider implements ConverterProvider {
                     )
                 );
                 break;
-            case STRING_TO_URL_STRING:
+            case TEXT_TO_URL_STRING:
                 if (0 != count) {
                     throw new IllegalArgumentException("Expected 0 value(s) got " + count + " " + values);
                 }
 
-                converter = NetConverters.stringToUrl();
+                converter = NetConverters.textToUrl();
                 break;
             default:
                 throw new IllegalArgumentException("Unknown converter " + name);
@@ -100,9 +100,9 @@ final class NetConvertersConverterProvider implements ConverterProvider {
 
     final static ConverterName HTTP_ENTITY_CONTENT_TYPE = ConverterName.with(HTTP_ENTITY_CONTENT_TYPE_STRING);
 
-    final static String STRING_TO_URL_STRING = "string-to-url";
+    final static String TEXT_TO_URL_STRING = "text-to-url";
 
-    final static ConverterName STRING_TO_URL = ConverterName.with(STRING_TO_URL_STRING);
+    final static ConverterName TEXT_TO_URL = ConverterName.with(TEXT_TO_URL_STRING);
 
     @Override
     public ConverterInfoSet converterInfos() {
@@ -112,7 +112,7 @@ final class NetConvertersConverterProvider implements ConverterProvider {
     private final static ConverterInfoSet INFOS = ConverterInfoSet.with(
         Sets.of(
             nameToConverterInfo(HTTP_ENTITY_CONTENT_TYPE),
-            nameToConverterInfo(STRING_TO_URL)
+            nameToConverterInfo(TEXT_TO_URL)
         )
     );
 
