@@ -18,15 +18,15 @@
 package walkingkooka.net.convert;
 
 import walkingkooka.Cast;
-import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
+import walkingkooka.convert.TextToTryingShortCircuitingConverter;
 import walkingkooka.net.Url;
 
 /**
  * A {@link Converter} that supports converting a {@link String} to one of the {@link Url} sub-classes.
  */
-final class TextToUrlConverter<C extends ConverterContext> implements Converter<C> {
+final class TextToUrlConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter.
@@ -45,38 +45,20 @@ final class TextToUrlConverter<C extends ConverterContext> implements Converter<
     }
 
     @Override
-    public boolean canConvert(final Object value,
-                              final Class<?> type,
-                              final C context) {
-        return context.canConvert(
-            value,
-            String.class
-        ) && Url.isClass(type);
+    public boolean isTargetType(final Object value,
+                                final Class<?> type,
+                                final C context) {
+        return Url.isClass(type);
     }
 
     @Override
-    public <T> Either<T, String> convert(final Object value,
-                                         final Class<T> type,
-                                         final C context) {
-        return this.canConvert(
-            value,
-            type,
-            context
-        ) ?
-            this.successfulConversion(
-                Url.parseAsUrl(
-                    context.convertOrFail(
-                        value,
-                        String.class
-                    ),
-                    Cast.to(type)
-                ),
-                type
-            ) :
-            this.failConversion(
-                value,
-                type
-            );
+    public Object parseText(final String text,
+                            final Class<?> type,
+                            final C context) {
+        return Url.parseAsUrl(
+            text,
+            Cast.to(type)
+        );
     }
 
     @Override

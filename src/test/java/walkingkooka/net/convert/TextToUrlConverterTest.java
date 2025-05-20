@@ -44,6 +44,17 @@ public final class TextToUrlConverterTest implements ConverterTesting2<TextToUrl
     }
 
     @Test
+    public void testConvertStringBuilderToAbsoluteUrl() {
+        final String text = "https://example.com";
+
+        this.convertAndCheck(
+            new StringBuilder(text),
+            AbsoluteUrl.class,
+            Url.parseAbsolute(text)
+        );
+    }
+
+    @Test
     public void testConvertStringToAbsoluteUrl() {
         this.convertStringAndCheck(
             "https://example.com",
@@ -51,7 +62,6 @@ public final class TextToUrlConverterTest implements ConverterTesting2<TextToUrl
             Url::parseAbsolute
         );
     }
-
 
     @Test
     public void testConvertStringToRelativeUrl() {
