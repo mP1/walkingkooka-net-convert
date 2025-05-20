@@ -18,9 +18,9 @@
 package walkingkooka.net.convert;
 
 import walkingkooka.Cast;
-import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
+import walkingkooka.convert.TryingShortCircuitingConverter;
 import walkingkooka.net.header.MediaType;
 import walkingkooka.net.http.HttpEntity;
 
@@ -30,7 +30,7 @@ import java.util.Objects;
  * A {@link Converter} which may be used a guard and is only successful if the {@link HttpEntity} content type is compatible.
  * It is intended to probably be the first {@link Converter} in a chain.
  */
-final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterContext> implements Converter<C> {
+final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
     static HttpEntityWithContentTypeToHttpEntityConverter with(final MediaType contentType) {
         return new HttpEntityWithContentTypeToHttpEntityConverter(
@@ -58,20 +58,10 @@ final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterCo
     private final MediaType contentType;
 
     @Override
-    public <T> Either<T, String> convert(final Object value,
-                                         final Class<T> type,
-                                         final C context) {
-        return this.canConvert(
-            value,
-            type,
-            context
-        ) ? this.successfulConversion(
-            value,
-            type
-        ) : this.failConversion(
-            value,
-            type
-        );
+    public Object tryConvertOrFail(final Object value,
+                                   final Class<?> type,
+                                   final C context) {
+        return value;
     }
 
     // Object...........................................................................................................
