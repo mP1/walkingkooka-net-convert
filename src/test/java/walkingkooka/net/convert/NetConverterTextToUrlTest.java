@@ -30,7 +30,7 @@ import walkingkooka.net.Url;
 
 import java.util.function.Function;
 
-public final class TextToUrlConverterTest implements ConverterTesting2<TextToUrlConverter<FakeConverterContext>, FakeConverterContext> {
+public final class NetConverterTextToUrlTest implements ConverterTesting2<NetConverterTextToUrl<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertStringToUrl() {
@@ -93,8 +93,8 @@ public final class TextToUrlConverterTest implements ConverterTesting2<TextToUrl
     }
 
     @Override
-    public TextToUrlConverter<FakeConverterContext> createConverter() {
-        return TextToUrlConverter.instance();
+    public NetConverterTextToUrl<FakeConverterContext> createConverter() {
+        return NetConverterTextToUrl.instance();
     }
 
     @Override
@@ -126,7 +126,17 @@ public final class TextToUrlConverterTest implements ConverterTesting2<TextToUrl
     }
 
     @Override
-    public Class<TextToUrlConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToUrlConverter.class);
+    public Class<NetConverterTextToUrl<FakeConverterContext>> type() {
+        return Cast.to(NetConverterTextToUrl.class);
+    }
+
+    @Override
+    public String typeNamePrefix() {
+        return "NetConverter";
+    }
+
+    @Override
+    public String typeNameSuffix() {
+        return "";
     }
 }

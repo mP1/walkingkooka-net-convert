@@ -26,21 +26,21 @@ import walkingkooka.net.Url;
 /**
  * A {@link Converter} that supports converting a {@link String} to one of the {@link Url} sub-classes.
  */
-final class TextToUrlConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class NetConverterTextToUrl<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter.
      */
-    static <C extends ConverterContext> TextToUrlConverter<C> instance() {
+    static <C extends ConverterContext> NetConverterTextToUrl<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TextToUrlConverter INSTANCE = new TextToUrlConverter();
+    private final static NetConverterTextToUrl INSTANCE = new NetConverterTextToUrl();
 
-    private TextToUrlConverter() {
+    private NetConverterTextToUrl() {
         super();
     }
 
