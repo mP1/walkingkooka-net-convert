@@ -30,15 +30,15 @@ import java.util.Objects;
  * A {@link Converter} which may be used a guard and is only successful if the {@link HttpEntity} content type is compatible.
  * It is intended to probably be the first {@link Converter} in a chain.
  */
-final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
+final class NetConverterHttpEntityWithContentType<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
-    static <C extends ConverterContext> HttpEntityWithContentTypeToHttpEntityConverter<C> with(final MediaType contentType) {
-        return new HttpEntityWithContentTypeToHttpEntityConverter<>(
+    static <C extends ConverterContext> NetConverterHttpEntityWithContentType<C> with(final MediaType contentType) {
+        return new NetConverterHttpEntityWithContentType<>(
             Objects.requireNonNull(contentType, "contentType")
         );
     }
 
-    private HttpEntityWithContentTypeToHttpEntityConverter(final MediaType contentType) {
+    private NetConverterHttpEntityWithContentType(final MediaType contentType) {
         this.contentType = contentType.setParameters(MediaType.NO_PARAMETERS);
     }
 
@@ -74,11 +74,11 @@ final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterCo
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof HttpEntityWithContentTypeToHttpEntityConverter &&
+            other instanceof NetConverterHttpEntityWithContentType &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final HttpEntityWithContentTypeToHttpEntityConverter<?> other) {
+    private boolean equals0(final NetConverterHttpEntityWithContentType<?> other) {
         return this.contentType.equals(other.contentType);
     }
 

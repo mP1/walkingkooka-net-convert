@@ -29,14 +29,14 @@ import walkingkooka.net.http.HttpEntity;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements ConverterTesting2<HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext>, FakeConverterContext>,
-    HashCodeEqualsDefinedTesting2<HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext>> {
+public final class NetConverterHttpEntityWithContentTypeTest implements ConverterTesting2<NetConverterHttpEntityWithContentType<FakeConverterContext>, FakeConverterContext>,
+    HashCodeEqualsDefinedTesting2<NetConverterHttpEntityWithContentType<FakeConverterContext>> {
 
     @Test
     public void testWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> HttpEntityWithContentTypeToHttpEntityConverter.with(null)
+            () -> NetConverterHttpEntityWithContentType.with(null)
         );
     }
 
@@ -64,7 +64,7 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     @Test
     public void testConvertHttpEntityIncompatibleContentTypeFails2() {
         this.convertFails(
-            HttpEntityWithContentTypeToHttpEntityConverter.with(
+            NetConverterHttpEntityWithContentType.with(
                 MediaType.ANY_TEXT
             ),
             HttpEntity.EMPTY.addHeader(
@@ -89,7 +89,7 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     @Test
     public void testConvertHttpEntityCompatibleContentType() {
         this.convertAndCheck(
-            HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ANY_TEXT),
+            NetConverterHttpEntityWithContentType.with(MediaType.ANY_TEXT),
             HttpEntity.EMPTY.addHeader(
                 HttpHeaderName.CONTENT_TYPE,
                 MediaType.TEXT_PLAIN
@@ -103,7 +103,7 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
         final String bodyText = "BodyText 123abc";
 
         this.convertAndCheck(
-            HttpEntityWithContentTypeToHttpEntityConverter.<FakeConverterContext>with(MediaType.ANY_TEXT)
+            NetConverterHttpEntityWithContentType.<FakeConverterContext>with(MediaType.ANY_TEXT)
                 .to(
                     String.class,
                     Converters.hasTextToString()
@@ -118,8 +118,8 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     }
 
     @Override
-    public HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext> createConverter() {
-        return HttpEntityWithContentTypeToHttpEntityConverter.with(CONTENT_TYPE);
+    public NetConverterHttpEntityWithContentType<FakeConverterContext> createConverter() {
+        return NetConverterHttpEntityWithContentType.with(CONTENT_TYPE);
     }
 
     @Override
@@ -132,12 +132,12 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     @Test
     public void testEqualsDifferentContentType() {
         this.checkNotEquals(
-            HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ALL)
+            NetConverterHttpEntityWithContentType.with(MediaType.ALL)
         );
     }
 
     @Override
-    public HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext> createObject() {
+    public NetConverterHttpEntityWithContentType<FakeConverterContext> createObject() {
         return this.createConverter();
     }
 
@@ -146,14 +146,24 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            HttpEntityWithContentTypeToHttpEntityConverter.with(CONTENT_TYPE),
+            NetConverterHttpEntityWithContentType.with(CONTENT_TYPE),
             CONTENT_TYPE.toString()
         );
     }
 
     // class............................................................................................................
     @Override
-    public Class<HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext>> type() {
-        return Cast.to(HttpEntityWithContentTypeToHttpEntityConverter.class);
+    public Class<NetConverterHttpEntityWithContentType<FakeConverterContext>> type() {
+        return Cast.to(NetConverterHttpEntityWithContentType.class);
+    }
+
+    @Override
+    public String typeNamePrefix() {
+        return "NetConverter";
+    }
+
+    @Override
+    public String typeNameSuffix() {
+        return "";
     }
 }
