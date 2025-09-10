@@ -103,7 +103,7 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
         final String bodyText = "BodyText 123abc";
 
         this.convertAndCheck(
-            HttpEntityWithContentTypeToHttpEntityConverter.with(MediaType.ANY_TEXT)
+            HttpEntityWithContentTypeToHttpEntityConverter.<FakeConverterContext>with(MediaType.ANY_TEXT)
                 .to(
                     String.class,
                     Converters.hasTextToString()
@@ -118,7 +118,7 @@ public final class HttpEntityWithContentTypeToHttpEntityConverterTest implements
     }
 
     @Override
-    public HttpEntityWithContentTypeToHttpEntityConverter createConverter() {
+    public HttpEntityWithContentTypeToHttpEntityConverter<FakeConverterContext> createConverter() {
         return HttpEntityWithContentTypeToHttpEntityConverter.with(CONTENT_TYPE);
     }
 

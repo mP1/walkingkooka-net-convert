@@ -32,8 +32,8 @@ import java.util.Objects;
  */
 final class HttpEntityWithContentTypeToHttpEntityConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
-    static HttpEntityWithContentTypeToHttpEntityConverter with(final MediaType contentType) {
-        return new HttpEntityWithContentTypeToHttpEntityConverter(
+    static <C extends ConverterContext> HttpEntityWithContentTypeToHttpEntityConverter<C> with(final MediaType contentType) {
+        return new HttpEntityWithContentTypeToHttpEntityConverter<>(
             Objects.requireNonNull(contentType, "contentType")
         );
     }
