@@ -31,7 +31,7 @@ public final class NetConverters implements PublicStaticHelper {
      * {@see HttpEntityWithContentTypeToHttpEntityConverter}
      */
     public static <C extends ConverterContext> Converter<C> httpEntityContentType(final MediaType contentType) {
-        return HttpEntityWithContentTypeToHttpEntityConverter.with(contentType);
+        return NetConverterHttpEntityWithContentType.with(contentType);
     }
 
     /**
